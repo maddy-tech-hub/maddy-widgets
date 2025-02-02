@@ -1,4 +1,4 @@
-import { HeaderProps } from '@src/interfaces/Header';
+import { HeaderProps } from '@src/interfaces/header';
 import {
   HeaderContainer,
   Logo,
