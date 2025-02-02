@@ -124,7 +124,7 @@
   },
   "scripts": {
     "start": "webpack serve --hot --open --env FMR=false",
-    "build": "npm install webpack-cli && npx webpack --config webpack.config.js --mode production",
+    "build": "npx webpack --config webpack.config.js --mode production",
     "husky-install": "husky install",
     "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npx eslint src --ext .js,.jsx,.ts,.tsx --fix",
