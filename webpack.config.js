@@ -69,6 +69,9 @@ module.exports = {
             '@root': path.resolve(__dirname, './'),
             'process/browser': require.resolve('process/browser'),
         },
+        fallback: {
+            "child_process": false,
+          }
     },
     module: {
         rules: [
