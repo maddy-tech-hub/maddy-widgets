@@ -16,7 +16,6 @@ export const Section = styled.section`
   }
 `;
 
-
 const glow = keyframes`
   0% {
     box-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff, 0 0 60px #ff0066, 0 0 90px #ff0066;
@@ -37,7 +36,6 @@ export const Content = styled.div`
   gap: 2rem;
   max-width: 1200px;
   width: 100%;
-  
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr; /* Mobile layout: Single column */
@@ -92,7 +90,6 @@ export const ImageContainer = styled.div`
   }
 `;
 
-
 export const ImageWrapper = styled.div`
   width: 350px;
   height: 350px;
@@ -114,7 +111,6 @@ export const ImageWrapper = styled.div`
     height: 200px;
   }
 `;
-
 
 export const ProfileImage = styled.img`
   width: 100%;
@@ -155,7 +151,7 @@ export const ButtonIconsWrapper = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    align-items: center
+    align-items: center;
   }
 `;
 

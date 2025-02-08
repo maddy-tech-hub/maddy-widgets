@@ -1,5 +1,20 @@
 // src/utils/getSocialIcon.tsx (Renamed to .tsx)
-import { FaWhatsapp, FaInstagram, FaLinkedin, FaGithub, FaFacebook, FaTwitter, FaYoutube, FaTiktok, FaPinterest, FaReddit, FaSnapchat, FaDiscord, FaTelegram, FaEnvelope } from 'react-icons/fa';
+import {
+  FaWhatsapp,
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+  FaFacebook,
+  FaTwitter,
+  FaYoutube,
+  FaTiktok,
+  FaPinterest,
+  FaReddit,
+  FaSnapchat,
+  FaDiscord,
+  FaTelegram,
+  FaEnvelope,
+} from 'react-icons/fa';
 
 // Function to return the appropriate icon based on the platform name
 export const getSocialIcon = (platform: string) => {

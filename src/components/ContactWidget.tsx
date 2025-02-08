@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import emailjs from "emailjs-com";
-import "../styles/css/ContactWidget.css";
-import { ContactWidgetProps } from "@src/interfaces/ContactWidget";
+import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
+import '../styles/css/ContactWidget.css';
+import { ContactWidgetProps } from '@src/interfaces/ContactWidget';
 
 const ContactWidget: React.FC<ContactWidgetProps> = ({
   title,
@@ -18,7 +18,9 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
   const [popupStatus, setPopupStatus] = useState<boolean | null>(null);
 
   // Handle form input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { id, value } = e.target;
     const updatedData = { ...formData, [id]: value };
 
@@ -29,7 +31,7 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
   // Validate the form - all required fields must be filled
   const validateForm = (data: { [key: string]: string }) => {
     const isValid = formFields.every((field) => {
-      return !field.required || (data[field.id]?.trim() || "").length > 0;
+      return !field.required || (data[field.id]?.trim() || '').length > 0;
     });
     setIsFormValid(isValid);
   };
@@ -46,32 +48,42 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
     try {
       if (emailConfig) {
         // Send with Email.js
-        await emailjs.send(emailConfig.serviceId, emailConfig.templateId, formData, emailConfig.userId);
-        setPopupMessage("🎉 Thank you! Your message has been sent via Email.js.");
+        await emailjs.send(
+          emailConfig.serviceId,
+          emailConfig.templateId,
+          formData,
+          emailConfig.userId
+        );
+        setPopupMessage(
+          '🎉 Thank you! Your message has been sent via Email.js.'
+        );
         setPopupStatus(true);
       } else if (externalApiUrl) {
         // Send to external API
         const response = await fetch(externalApiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
         });
 
         const responseData = await response.json();
         if (response.ok) {
-          setPopupMessage("🎉 Thank you! Your message has been sent successfully.");
+          setPopupMessage(
+            '🎉 Thank you! Your message has been sent successfully.'
+          );
           setPopupStatus(true);
         } else {
-          setPopupMessage(`❌ Failed: ${responseData.message || "An error occurred."}`);
+          setPopupMessage(
+            `❌ Failed: ${responseData.message || 'An error occurred.'}`
+          );
           setPopupStatus(false);
         }
       }
 
       setFormData({}); // Reset form fields
-
     } catch (error) {
-      console.error("Error during submission:", error);
-      setPopupMessage("❌ Something went wrong. Please try again.");
+      console.error('Error during submission:', error);
+      setPopupMessage('❌ Something went wrong. Please try again.');
       setPopupStatus(false);
     } finally {
       // Set loading to false after the API call is completed
@@ -87,7 +99,9 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
   return (
     <div className="contact-widget">
       {popupMessage && (
-        <div className={`thank-you-popup ${popupStatus ? "success" : "failure"}`}>
+        <div
+          className={`thank-you-popup ${popupStatus ? 'success' : 'failure'}`}
+        >
           {popupMessage}
         </div>
       )}
@@ -99,11 +113,11 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
           {formFields.map((field) => (
             <div key={field.id} className="form-group">
               <label htmlFor={field.id}>{field.label}</label>
-              {field.type === "textarea" ? (
+              {field.type === 'textarea' ? (
                 <textarea
                   id={field.id}
                   placeholder={field.placeholder}
-                  value={formData[field.id] || ""}
+                  value={formData[field.id] || ''}
                   onChange={handleChange}
                   required={field.required}
                 />
@@ -112,7 +126,7 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
                   type={field.type}
                   id={field.id}
                   placeholder={field.placeholder}
-                  value={formData[field.id] || ""}
+                  value={formData[field.id] || ''}
                   onChange={handleChange}
                   required={field.required}
                 />

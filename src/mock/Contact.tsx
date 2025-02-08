@@ -1,23 +1,54 @@
-import React from "react";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaInstagram, FaLinkedin } from "react-icons/fa";
-import ContactWidget from '../components/ContactWidget'
+import React from 'react';
+import {
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaInstagram,
+  FaLinkedin,
+} from 'react-icons/fa';
+import ContactWidget from '../components/ContactWidget';
 const Contact: React.FC = () => {
   const formFields = [
-    { id: "name", label: "Name", type: "text", placeholder: "Your Name", required: true },
-    { id: "email", label: "Email", type: "email", placeholder: "Your Email", required: true },
-    { id: "phone", label: "Phone", type: "tel", placeholder: "Your Phone Number", required: true },
-    { id: "message", label: "Message", type: "textarea", placeholder: "Your Message", required: true },
+    {
+      id: 'name',
+      label: 'Name',
+      type: 'text',
+      placeholder: 'Your Name',
+      required: true,
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      type: 'email',
+      placeholder: 'Your Email',
+      required: true,
+    },
+    {
+      id: 'phone',
+      label: 'Phone',
+      type: 'tel',
+      placeholder: 'Your Phone Number',
+      required: true,
+    },
+    {
+      id: 'message',
+      label: 'Message',
+      type: 'textarea',
+      placeholder: 'Your Message',
+      required: true,
+    },
   ];
 
   const contactInfo = [
     {
       icon: <FaMapMarkerAlt />,
-      label: "Our Location",
-      value: "No.143, 4th Cross, Prasanth Extension, Whitefield, Bangalore - 560066",
+      label: 'Our Location',
+      value:
+        'No.143, 4th Cross, Prasanth Extension, Whitefield, Bangalore - 560066',
     },
     {
       icon: <FaPhoneAlt />,
-      label: "Urgent Call",
+      label: 'Urgent Call',
       value: (
         <>
           <p>+91 6362411428</p>
@@ -27,7 +58,7 @@ const Contact: React.FC = () => {
     },
     {
       icon: <FaEnvelope />,
-      label: "Email Address",
+      label: 'Email Address',
       value: (
         <>
           <p>hr@irasah.com</p>
@@ -37,13 +68,13 @@ const Contact: React.FC = () => {
     },
     {
       icon: <FaInstagram />,
-      label: "Instagram",
-      value: "Irasah_Innovations",
+      label: 'Instagram',
+      value: 'Irasah_Innovations',
     },
     {
       icon: <FaLinkedin />,
-      label: "LinkedIn",
-      value: "Irasah Innovations",
+      label: 'LinkedIn',
+      value: 'Irasah Innovations',
     },
   ];
 
@@ -55,13 +86,12 @@ const Contact: React.FC = () => {
         formFields={formFields}
         contactInfo={contactInfo}
         emailConfig={{
-          serviceId: "service_xyz",
-          templateId: "template_abc",
-          userId: "user_123",
+          serviceId: 'service_xyz',
+          templateId: 'template_abc',
+          userId: 'user_123',
         }}
         externalApiUrl="https://api.example.com/contact"
       />
-
     </div>
   );
 };

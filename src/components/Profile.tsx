@@ -15,7 +15,6 @@ import {
 } from '@src/styles/profile.styles';
 import { getSocialIcon } from './Service/GetSocialIcon';
 
-
 const Profile: React.FC<ProfileProps> = ({
   profileImage,
   siteTitle,
@@ -56,12 +55,16 @@ const Profile: React.FC<ProfileProps> = ({
               )}
             </SocialIcons>
             <ButtonsWrapper>
-              <ExternalLink href={profileText.cvLinkURL} target="_blank" rel="noopener noreferrer">
+              <ExternalLink
+                href={profileText.cvLinkURL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {profileText.cvLinkText}
               </ExternalLink>
               <InternalLink to={profileText.aboutLinkURL}>
                 {profileText.aboutLinkText}
-              </InternalLink >
+              </InternalLink>
             </ButtonsWrapper>
           </ButtonIconsWrapper>
         </Text>
