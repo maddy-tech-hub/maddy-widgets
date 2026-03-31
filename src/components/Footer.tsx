@@ -138,9 +138,9 @@ const FooterSection: React.FC<{
     <FooterSectionWrap>
       {title ? <FooterSectionTitle $titleColor={titleColor}>{title}</FooterSectionTitle> : null}
       {links.map(
-        (link) =>
+        (link, index) =>
           link.url ? (
-            <FooterLink key={link.url} href={link.url}>
+            <FooterLink key={`${link.url}-${link.label || 'link'}-${index}`} href={link.url}>
               {link.label || link.url}
             </FooterLink>
           ) : null

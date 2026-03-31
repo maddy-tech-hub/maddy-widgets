@@ -140,27 +140,35 @@ export const SidebarBackdrop = styled.button<{ menuOpen: boolean }>`
   position: fixed;
   inset: 0;
   border: none;
-  background: rgba(7, 17, 31, 0.52);
+  background: rgba(7, 17, 31, 0.68);
+  backdrop-filter: blur(6px);
   opacity: ${({ menuOpen }) => (menuOpen ? 1 : 0)};
   pointer-events: ${({ menuOpen }) => (menuOpen ? 'auto' : 'none')};
   transition: opacity 0.25s ease;
-  z-index: 998;
+  z-index: 1200;
 `;
 
 export const Sidebar = styled.aside<{ menuOpen: boolean; theme?: any }>`
   position: fixed;
   top: 0;
   right: 0;
-  width: min(360px, 86vw);
-  height: 100vh;
+  width: min(390px, 88vw);
+  height: 100dvh;
   background: ${({ theme }) =>
     theme?.sidebarBackgroundColor || 'rgba(10, 22, 40, 0.96)'};
   color: ${({ theme }) => theme?.textColor || tokens.color.inkInverse};
   transform: ${({ menuOpen }) =>
     menuOpen ? 'translateX(0)' : 'translateX(105%)'};
   transition: transform 0.28s ease-in-out;
-  z-index: 999;
-  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.2);
+  z-index: 1201;
+  overflow-y: auto;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -24px 0 60px rgba(0, 0, 0, 0.28);
+
+  @media (max-width: 640px) {
+    width: 100vw;
+    border-left: none;
+  }
 `;
 
 export const SidebarContent = styled.div`
@@ -168,30 +176,55 @@ export const SidebarContent = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   height: 100%;
-  padding: 5.75rem 1.25rem 1.25rem;
+  padding:
+    calc(env(safe-area-inset-top, 0px) + 0.9rem)
+    1rem
+    calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+`;
+
+export const SidebarHeaderRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+`;
+
+export const SidebarCloseButton = styled.button<{ theme?: any }>`
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  color: ${({ theme }) => theme?.menuIconColor || tokens.color.inkInverse};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
 `;
 
 export const SidebarNavList = styled.ul<{ theme?: any }>`
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.7rem;
   margin: 0;
   padding: 0;
 
   a {
     display: block;
-    padding: 0.95rem 1rem;
-    border-radius: ${tokens.radius.md};
+    padding: 1rem 1.05rem;
+    border-radius: 20px;
     color: ${({ theme }) => theme?.navLinkColor || tokens.color.inkInverse};
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 
     &:hover,
     &[aria-current='page'] {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 `;

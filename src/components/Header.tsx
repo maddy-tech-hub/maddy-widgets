@@ -10,6 +10,8 @@ import {
   SidebarBackdrop,
   Sidebar,
   SidebarContent,
+  SidebarHeaderRow,
+  SidebarCloseButton,
   SidebarNavList,
   MobileLoginButton,
 } from '@src/styles/Header.styles';
@@ -81,7 +83,13 @@ const Header: React.FC<HeaderProps> = ({
             </LoginLink>
           ) : null}
 
-          <MenuToggle onClick={toggleMenu} theme={theme} aria-label="Toggle navigation">
+          <MenuToggle
+            onClick={toggleMenu}
+            theme={theme}
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
+          >
             {menuOpen ? <FaTimes /> : <FaBars />}
           </MenuToggle>
         </HeaderContainer>
@@ -89,8 +97,18 @@ const Header: React.FC<HeaderProps> = ({
 
       <SidebarBackdrop menuOpen={menuOpen} onClick={closeMenu} aria-label="Close menu overlay" />
 
-      <Sidebar menuOpen={menuOpen} theme={theme}>
+      <Sidebar id="mobile-navigation" menuOpen={menuOpen} theme={theme}>
         <SidebarContent>
+          <SidebarHeaderRow>
+            <SmartLink href="/" aria-label="Go to home page" onClick={closeMenu}>
+              <Logo>{logoSrc && <img src={logoSrc} alt="Main Logo" />}</Logo>
+            </SmartLink>
+
+            <SidebarCloseButton onClick={closeMenu} theme={theme} aria-label="Close navigation">
+              <FaTimes />
+            </SidebarCloseButton>
+          </SidebarHeaderRow>
+
           <SidebarNavList theme={theme}>
             {menuLinks.map((link) => (
               <li key={link.url}>
