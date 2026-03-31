@@ -25,11 +25,6 @@ const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
     top: position.top,
     right: position.right,
     left: position.left,
-    backgroundColor,
-    color: iconColor,
-    borderRadius: '50%',
-    padding: 10,
-    boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
     zIndex: 1000,
     cursor: draggable ? 'grab' : 'pointer',
   };

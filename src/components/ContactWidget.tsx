@@ -1,9 +1,175 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import styled from 'styled-components';
 import { ContactWidgetProps } from '@src/interfaces/ContactWidget';
 import Button from '@src/shared/ui/Button';
 import SectionHeading from '@src/shared/ui/SectionHeading';
-import '../styles/css/ContactWidget.css';
+import { tokens } from '@src/shared/theme/tokens';
+
+const Wrapper = styled.section`
+  width: min(1200px, 100%);
+  margin: 0 auto;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 1.25rem;
+
+  @media (max-width: 920px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Panel = styled.div`
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: ${tokens.radius.xl};
+  background: ${tokens.gradient.surface};
+  border: 1px solid ${tokens.color.border};
+  box-shadow: ${tokens.shadow.card};
+`;
+
+const Popup = styled.div<{ $success: boolean }>`
+  position: sticky;
+  top: 86px;
+  z-index: 3;
+  width: fit-content;
+  margin: 0 0 1rem auto;
+  padding: 0.8rem 1rem;
+  border-radius: ${tokens.radius.md};
+  background: ${({ $success }) =>
+    $success ? 'rgba(31, 169, 113, 0.12)' : 'rgba(220, 79, 106, 0.12)'};
+  border: 1px solid
+    ${({ $success }) =>
+      $success ? 'rgba(31, 169, 113, 0.22)' : 'rgba(220, 79, 106, 0.22)'};
+  color: ${({ $success }) =>
+    $success ? tokens.color.success : tokens.color.danger};
+  font-weight: 700;
+`;
+
+const Form = styled.form`
+  display: grid;
+  gap: 1rem;
+`;
+
+const FieldGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const FullWidth = styled.div`
+  grid-column: 1 / -1;
+`;
+
+const FormGroup = styled.div`
+  display: grid;
+  gap: 0.5rem;
+
+  label {
+    color: ${tokens.color.ink};
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+`;
+
+const fieldStyles = `
+  width: 100%;
+  min-height: 54px;
+  padding: 0.95rem 1rem;
+  border-radius: ${tokens.radius.md};
+  border: 1px solid ${tokens.color.border};
+  background: ${tokens.color.surface};
+  color: ${tokens.color.ink};
+  font: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: ${tokens.color.brand};
+    box-shadow: 0 0 0 4px rgba(17, 126, 255, 0.14);
+  }
+`;
+
+const Input = styled.input`
+  ${fieldStyles}
+`;
+
+const TextArea = styled.textarea`
+  ${fieldStyles}
+  min-height: 160px;
+  resize: vertical;
+`;
+
+const InfoLabel = styled.p`
+  margin: 0;
+  color: ${tokens.color.brandDark};
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+`;
+
+const InfoTitle = styled.h3`
+  margin: 0.75rem 0 0;
+  color: ${tokens.color.ink};
+  font-size: 1.7rem;
+`;
+
+const InfoCopy = styled.p`
+  margin: 0.9rem 0 0;
+  color: ${tokens.color.inkMuted};
+  line-height: 1.8;
+`;
+
+const InfoList = styled.div`
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+`;
+
+const InfoItem = styled.div`
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: ${tokens.radius.lg};
+  background: ${tokens.color.surfaceMuted};
+  border: 1px solid rgba(13, 27, 51, 0.08);
+`;
+
+const IconWrap = styled.span`
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(17, 126, 255, 0.1);
+  color: ${tokens.color.brand};
+  font-size: 1.2rem;
+`;
+
+const InfoHeading = styled.h4`
+  margin: 0;
+  color: ${tokens.color.ink};
+  font-size: 1rem;
+`;
+
+const InfoValue = styled.div`
+  margin-top: 0.4rem;
+  color: ${tokens.color.inkMuted};
+  line-height: 1.7;
+
+  p {
+    margin: 0;
+  }
+`;
 
 const ContactWidget: React.FC<ContactWidgetProps> = ({
   title,
@@ -85,67 +251,81 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
   };
 
   return (
-    <div className="contact-widget">
-      {popupMessage ? (
-        <div
-          className={`thank-you-popup ${popupStatus ? 'success' : 'failure'}`}
-        >
-          {popupMessage}
-        </div>
+    <Wrapper>
+      {popupMessage && popupStatus !== null ? (
+        <Popup $success={popupStatus}>{popupMessage}</Popup>
       ) : null}
 
-      <div className="contact-form-section">
-        <form onSubmit={handleSubmit} className="contact-form">
-          <SectionHeading title={title} />
-          {formFields.map((field) => (
-            <div key={field.id} className="form-group">
-              <label htmlFor={field.id}>{field.label}</label>
-              {field.type === 'textarea' ? (
-                <textarea
-                  id={field.id}
-                  placeholder={field.placeholder}
-                  value={formData[field.id] || ''}
-                  onChange={handleChange}
-                  required={field.required}
-                />
-              ) : (
-                <input
-                  type={field.type}
-                  id={field.id}
-                  placeholder={field.placeholder}
-                  value={formData[field.id] || ''}
-                  onChange={handleChange}
-                  required={field.required}
-                />
-              )}
-            </div>
-          ))}
-          <Button
-            type="submit"
-            className="submit-button"
-            disabled={!isFormValid}
-          >
-            {submitTitle}
-          </Button>
-        </form>
-      </div>
+      <Grid>
+        <Panel>
+          <SectionHeading
+            eyebrow="Let's build"
+            title={title}
+            subtitle="Tell me about the product, portfolio, or platform you want to improve. I'm especially interested in React frontends, .NET APIs, dashboards, and migration work."
+          />
 
-      <div className="contact-info-section">
-        {contactInfo.map((info, index) => (
-          <div key={index} className="contact-info-item">
-            <span className="contact-icon">{info.icon}</span>
-            <div>
-              <h4>{info.label}</h4>
-              {typeof info.value === 'string' ? (
-                <p>{info.value}</p>
-              ) : (
-                <div>{info.value}</div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+          <Form onSubmit={handleSubmit}>
+            <FieldGrid>
+              {formFields.map((field) => {
+                const isTextArea = field.type === 'textarea';
+
+                return (
+                  <FormGroup key={field.id} as={isTextArea ? FullWidth : 'div'}>
+                    <label htmlFor={field.id}>{field.label}</label>
+                    {isTextArea ? (
+                      <TextArea
+                        id={field.id}
+                        placeholder={field.placeholder}
+                        value={formData[field.id] || ''}
+                        onChange={handleChange}
+                        required={field.required}
+                      />
+                    ) : (
+                      <Input
+                        type={field.type}
+                        id={field.id}
+                        placeholder={field.placeholder}
+                        value={formData[field.id] || ''}
+                        onChange={handleChange}
+                        required={field.required}
+                      />
+                    )}
+                  </FormGroup>
+                );
+              })}
+            </FieldGrid>
+
+            <Button type="submit" disabled={!isFormValid}>
+              {submitTitle}
+            </Button>
+          </Form>
+        </Panel>
+
+        <Panel>
+          <InfoLabel>Direct contact</InfoLabel>
+          <InfoTitle>Prefer to connect the simple way?</InfoTitle>
+          <InfoCopy>
+            Reach out for full-stack product work, UI modernization, micro-frontends,
+            or performance improvements. I'm happy to discuss architecture, delivery,
+            and implementation details.
+          </InfoCopy>
+
+          <InfoList>
+            {contactInfo.map((info, index) => (
+              <InfoItem key={index}>
+                <IconWrap>{info.icon}</IconWrap>
+                <div>
+                  <InfoHeading>{info.label}</InfoHeading>
+                  <InfoValue>
+                    {typeof info.value === 'string' ? <p>{info.value}</p> : info.value}
+                  </InfoValue>
+                </div>
+              </InfoItem>
+            ))}
+          </InfoList>
+        </Panel>
+      </Grid>
+    </Wrapper>
   );
 };
 

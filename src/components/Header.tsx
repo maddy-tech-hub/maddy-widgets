@@ -1,16 +1,19 @@
 import { HeaderProps } from '@src/interfaces/header';
 import {
+  HeaderShell,
   HeaderContainer,
   Logo,
   Nav,
   NavList,
   LoginLink,
   MenuToggle,
+  SidebarBackdrop,
   Sidebar,
   SidebarContent,
   SidebarNavList,
+  MobileLoginButton,
 } from '@src/styles/Header.styles';
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import SmartLink from '@src/shared/ui/SmartLink';
 
@@ -22,56 +25,70 @@ const Header: React.FC<HeaderProps> = ({
   onLoginClick,
   theme,
 }) => {
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = () => setMenuOpen((current) => !current);
   const closeMenu = () => setMenuOpen(false);
 
-  // useCallback to prevent unnecessary re-creations of the handler
-  const handleResize = useCallback(() => {
-    if (window.innerWidth > 768) {
-      setMenuOpen(false);
-    }
-  }, [setMenuOpen]);
-
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    const handleResize = () => {
+      if (window.innerWidth > 900) {
+        setMenuOpen(false);
+      }
+    };
 
-    // Cleanup the event listener
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('keydown', handleEscape);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
     };
-  }, [handleResize]);
+  }, [menuOpen, setMenuOpen]);
+
+  const handleMobileLogin = () => {
+    closeMenu();
+    onLoginClick?.();
+  };
 
   return (
     <>
-      <HeaderContainer theme={theme}>
-        {/* Logo */}
-        <Logo>{logoSrc && <img src={logoSrc} alt="Main Logo" />}</Logo>
+      <HeaderShell theme={theme}>
+        <HeaderContainer>
+          <SmartLink href="/" aria-label="Go to home page">
+            <Logo>{logoSrc && <img src={logoSrc} alt="Main Logo" />}</Logo>
+          </SmartLink>
 
-        {/* Desktop Navigation */}
-        <Nav theme={theme}>
-          <NavList theme={theme}>
-            {menuLinks.map((link) => (
-              <li key={link.url}>
-                <SmartLink href={link.url}>{link.label}</SmartLink>
-              </li>
-            ))}
-          </NavList>
-        </Nav>
+          <Nav>
+            <NavList theme={theme}>
+              {menuLinks.map((link) => (
+                <li key={link.url}>
+                  <SmartLink href={link.url}>{link.label}</SmartLink>
+                </li>
+              ))}
+            </NavList>
+          </Nav>
 
-        {/* Login Button (Desktop) */}
-        {onLoginClick && (
-          <LoginLink onClick={onLoginClick} theme={theme}>
-            Login
-          </LoginLink>
-        )}
+          {onLoginClick ? (
+            <LoginLink onClick={onLoginClick} theme={theme}>
+              Login
+            </LoginLink>
+          ) : null}
 
-        {/* Menu Toggle (Mobile) */}
-        <MenuToggle onClick={toggleMenu} theme={theme}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </MenuToggle>
-      </HeaderContainer>
+          <MenuToggle onClick={toggleMenu} theme={theme} aria-label="Toggle navigation">
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </MenuToggle>
+        </HeaderContainer>
+      </HeaderShell>
 
-      {/* Sidebar for Mobile */}
+      <SidebarBackdrop menuOpen={menuOpen} onClick={closeMenu} aria-label="Close menu overlay" />
+
       <Sidebar menuOpen={menuOpen} theme={theme}>
         <SidebarContent>
           <SidebarNavList theme={theme}>
@@ -83,6 +100,12 @@ const Header: React.FC<HeaderProps> = ({
               </li>
             ))}
           </SidebarNavList>
+
+          {onLoginClick ? (
+            <MobileLoginButton onClick={handleMobileLogin} theme={theme}>
+              Login
+            </MobileLoginButton>
+          ) : null}
         </SidebarContent>
       </Sidebar>
     </>

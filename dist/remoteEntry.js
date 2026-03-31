@@ -31,7 +31,7 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 
 /***/ }),
 
-/***/ 6768:
+/***/ 8531:
 /*!***********************!*\
   !*** container entry ***!
   \***********************/
@@ -40,28 +40,31 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 "use strict";
 var moduleMap = {
 	"./Header": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(832)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Header */ 2832)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(832), __webpack_require__.e(901)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Header */ 2832)))));
 	},
 	"./Footer": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(866), __webpack_require__.e(937)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Footer */ 9866)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(866)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Footer */ 9866)))));
 	},
 	"./WhatsAppWidget": () => {
 		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(794), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(676), __webpack_require__.e(501)]).then(() => (() => ((__webpack_require__(/*! ./src/components/WhatsAppWidget */ 8501)))));
 	},
 	"./Profile": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(840)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Profile */ 5840)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(27), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(840), __webpack_require__.e(209)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Profile */ 5840)))));
 	},
 	"./ContactWidget": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(193), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(655), __webpack_require__.e(490)]).then(() => (() => ((__webpack_require__(/*! ./src/components/ContactWidget */ 3655)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(58), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(655), __webpack_require__.e(282)]).then(() => (() => ((__webpack_require__(/*! ./src/components/ContactWidget */ 3655)))));
 	},
 	"./CardSection": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(203), __webpack_require__.e(727)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Card/CardSection */ 1203)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(688), __webpack_require__.e(203)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Card/CardSection */ 1203)))));
 	},
 	"./Card": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(688)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Card/Card */ 9688)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(688), __webpack_require__.e(490)]).then(() => (() => ((__webpack_require__(/*! ./src/components/Card/Card */ 9688)))));
 	},
 	"./Button": () => {
-		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(209)]).then(() => (() => ((__webpack_require__(/*! ./src/shared/ui/Button */ 7209)))));
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(590)]).then(() => (() => ((__webpack_require__(/*! ./src/shared/ui/Button */ 7209)))));
+	},
+	"./PageIntro": () => {
+		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(556)]).then(() => (() => ((__webpack_require__(/*! ./src/shared/ui/PageIntro */ 7556)))));
 	},
 	"./SectionHeading": () => {
 		return Promise.all([__webpack_require__.e(848), __webpack_require__.e(318), __webpack_require__.e(719), __webpack_require__.e(732)]).then(() => (() => ((__webpack_require__(/*! ./src/shared/ui/SectionHeading */ 4732)))));
@@ -815,7 +818,7 @@ eval("\nvar parent = __webpack_require__(/*! ../es/global-this */ 2671);\n\nmodu
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "bundle." + {"27":"ddc1ce164766463fa998","193":"e2e2ae7cefef501df59a","203":"27ca710858df464a0778","209":"e283bde9348f244a153f","222":"4adabe266c67be22cb0b","267":"db37ecd8b6354999ba7b","490":"7889d3ae58a297ee8918","501":"83f661c6bf44ac24bd7a","540":"584418592cfc8b82297e","655":"fc3f65dd38d11a6ffb7e","688":"073c50215fc50748c3b8","727":"31e917c0211654b2a00d","732":"01306b4540bfd1f83c4a","794":"018bffa04141e9939d6d","832":"5b1490f31b5d751a0b95","840":"fa0342134c37d9d09e7b","848":"3aa892894a46a3bdd46a","866":"84305f3f21b8426c43e1","937":"dda00d873b8e9c890108","961":"ffadc51d709ee5f80640"}[chunkId] + ".js";
+/******/ 			return "bundle." + {"27":"ddc1ce164766463fa998","58":"48c7a876347a0708214f","203":"f6c4d278e5968dfa9a2c","209":"a346497554acbf15e0c5","222":"3ff44f636e72c7797d5f","267":"db37ecd8b6354999ba7b","282":"fd1aeda54d0bec3b1c8e","490":"7889d3ae58a297ee8918","501":"51f00ce449de17bbe25c","540":"584418592cfc8b82297e","556":"cfce062d92b5f29104d6","590":"aff7c5c5acdbe6b509be","655":"d7344b116ef9b51125af","688":"2001f52c82e9847af538","732":"73624f8067445283c832","794":"018bffa04141e9939d6d","832":"23cbdd344b09ce99f214","840":"22b23feced35650fa766","848":"3aa892894a46a3bdd46a","866":"de4b1718e9c150c24ccd","901":"1f3089dfa9589063f168","961":"ffadc51d709ee5f80640"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -835,7 +838,7 @@ eval("\nvar parent = __webpack_require__(/*! ../es/global-this */ 2671);\n\nmodu
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("60311a3ecf8f121f7fe1")
+/******/ 		__webpack_require__.h = () => ("794d3be5cdc83d06f9f0")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -2209,7 +2212,7 @@ eval("\nvar parent = __webpack_require__(/*! ../es/global-this */ 2671);\n\nmodu
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	__webpack_require__(5528);
-/******/ 	var __webpack_exports__ = __webpack_require__(6768);
+/******/ 	var __webpack_exports__ = __webpack_require__(8531);
 /******/ 	self.ui_remote = __webpack_exports__;
 /******/ 	
 /******/ })()

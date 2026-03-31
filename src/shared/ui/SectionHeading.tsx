@@ -18,14 +18,16 @@ const Eyebrow = styled.p`
 const Title = styled.h2`
   margin: 0;
   color: ${tokens.color.ink};
-  font-size: clamp(1.8rem, 2.5vw, 2.6rem);
+  font-size: clamp(1.9rem, 2.8vw, 2.9rem);
+  line-height: 1.08;
 `;
 
 const Subtitle = styled.p`
   margin: 10px 0 0;
   max-width: 680px;
   color: ${tokens.color.inkMuted};
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
 `;
 
 interface SectionHeadingProps {

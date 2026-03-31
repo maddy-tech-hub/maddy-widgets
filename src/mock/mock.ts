@@ -1,18 +1,37 @@
+import {
+  EXPERIENCE_JOIN_DATE,
+  getRoundedExperienceValue,
+} from '@src/shared/utils/experience';
+
+const experienceValue = getRoundedExperienceValue(EXPERIENCE_JOIN_DATE);
+
 export const profileData = {
   profileImage: '/path/to/image.jpg',
-  siteTitle: 'My Website',
+  siteTitle: 'Madhava Reddy Vemireddy',
   socialLinks: {
-    whatsapp: 'https://wa.me/1234567890',
-    instagram: 'https://instagram.com/username',
-    linkedin: 'https://linkedin.com/in/username',
-    gmail: 'mailto:someone@example.com',
+    whatsapp: 'https://wa.me/8886380746',
+    instagram: 'https://www.instagram.com/vemireddy_official',
+    linkedin: 'https://www.linkedin.com/in/madhava-reddy-vemireddy-9a0826167',
+    gmail: 'mailto:Madhav.reddy.vemireddy@gmail.com',
   },
+  highlights: [
+    'React architecture',
+    'ASP.NET Web API',
+    'Micro-frontends',
+    'Reusable UI systems',
+  ],
+  metrics: [
+    { value: experienceValue, label: 'Years of delivery experience' },
+    { value: 'React + .NET', label: 'Core delivery stack' },
+    { value: 'Finance Tracker', label: 'Current full-stack build' },
+  ],
   profileText: {
-    greeting: "Hello, It's Me",
+    greeting: "Hello, it's me",
     name: 'Madhava Reddy Vemireddy',
-    title: 'Full Stack Developer',
+    title: 'Senior Full-Stack React & .NET Developer',
     description:
-      'I specialize in building responsive frontends with React and scalable backends with .NET C#. My focus is on delivering modern, efficient, and user-friendly web solutions.',
+      'I build scalable products with React, TypeScript, and ASP.NET Web API, with a focus on reusable UI, secure integrations, and polished user experience.',
+    badge: 'Open to React + .NET product roles',
     aboutLinkText: 'More About Me',
     aboutLinkURL: '/about',
     cvLinkText: 'Download CV',
@@ -53,7 +72,7 @@ export const headerData = {
   ],
   logoSrc: '',
   menuOpen: false,
-  setMenuOpen: (value: boolean) => {},
+  setMenuOpen: (_value: boolean) => {},
   onLoginClick: () => console.log('Login Clicked'),
   theme: modernDarkTheme,
 };

@@ -5,6 +5,12 @@ import {
   Section,
   Content,
   SocialIcons,
+  Highlights,
+  HighlightPill,
+  Metrics,
+  MetricCard,
+  MetricLabel,
+  MetricValue,
   ImageContainer,
   ImageWrapper,
   ProfileImage,
@@ -18,6 +24,8 @@ const Profile: React.FC<ProfileProps> = ({
   profileImage,
   siteTitle,
   socialLinks,
+  highlights = [],
+  metrics = [],
   profileText,
 }) => {
   const socialLinksData = Object.entries(socialLinks).map(([key, url]) => ({
@@ -29,19 +37,37 @@ const Profile: React.FC<ProfileProps> = ({
     <Section>
       <Content>
         <Text>
+          {profileText.badge ? <h4>{profileText.badge}</h4> : null}
           <h1>{profileText.greeting}</h1>
           <h2>{profileText.name}</h2>
           <h3>
-            And I'm a <span>{profileText.title}</span>
+            <span>{profileText.title}</span>
           </h3>
           <p>{profileText.description}</p>
 
-          {/* Social Icons and Button */}
+          {highlights.length > 0 ? (
+            <Highlights>
+              {highlights.map((highlight) => (
+                <HighlightPill key={highlight}>{highlight}</HighlightPill>
+              ))}
+            </Highlights>
+          ) : null}
+
           <ButtonIconsWrapper>
+            <ButtonsWrapper>
+              <Button href={profileText.cvLinkURL} target="_blank">
+                {profileText.cvLinkText}
+              </Button>
+              <Button to={profileText.aboutLinkURL} variant="secondary">
+                {profileText.aboutLinkText}
+              </Button>
+            </ButtonsWrapper>
+
             <SocialIcons>
               {socialLinksData.map(
                 (link, index) =>
-                  link.icon && (
+                  link.icon &&
+                  link.url && (
                     <a
                       key={index}
                       href={link.url}
@@ -53,17 +79,17 @@ const Profile: React.FC<ProfileProps> = ({
                   )
               )}
             </SocialIcons>
-            <ButtonsWrapper>
-              <Button
-                href={profileText.cvLinkURL}
-                target="_blank"
-              >
-                {profileText.cvLinkText}
-              </Button>
-              <Button to={profileText.aboutLinkURL}>
-                {profileText.aboutLinkText}
-              </Button>
-            </ButtonsWrapper>
+
+            {metrics.length > 0 ? (
+              <Metrics>
+                {metrics.map((metric) => (
+                  <MetricCard key={`${metric.label}-${metric.value}`}>
+                    <MetricValue>{metric.value}</MetricValue>
+                    <MetricLabel>{metric.label}</MetricLabel>
+                  </MetricCard>
+                ))}
+              </Metrics>
+            ) : null}
           </ButtonIconsWrapper>
         </Text>
         <ImageContainer>
