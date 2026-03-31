@@ -65,3 +65,4 @@ Recommended ownership inside this repo:
 - `src/hooks`: reusable widget hooks
 - `src/utils`: helper utilities
 - `src/styles`: component styling
+
