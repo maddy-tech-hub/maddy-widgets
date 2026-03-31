@@ -25,7 +25,8 @@ const FooterGrid = styled.div`
   gap: 1.5rem;
 
   @media (max-width: 860px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 1rem;
   }
 `;
 
@@ -33,6 +34,10 @@ const BrandBlock = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+
+  @media (max-width: 860px) {
+    grid-column: 1 / -1;
+  }
 `;
 
 const BrandLine = styled.span`
@@ -70,6 +75,7 @@ const FooterSectionWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  min-width: 0;
 `;
 
 const FooterSectionTitle = styled.h4<{ $titleColor?: string }>`
@@ -83,6 +89,7 @@ const FooterSectionTitle = styled.h4<{ $titleColor?: string }>`
 
 const FooterLink = styled(SmartLink)`
   color: rgba(248, 251, 255, 0.8);
+  line-height: 1.55;
   text-decoration: none;
   transition: color 0.2s ease, transform 0.2s ease;
 
