@@ -12,7 +12,7 @@ import {
 } from '@src/styles/Header.styles';
 import React, { useEffect, useCallback } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import SmartLink from '@src/shared/ui/SmartLink';
 
 const Header: React.FC<HeaderProps> = ({
   menuLinks,
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
           <NavList theme={theme}>
             {menuLinks.map((link) => (
               <li key={link.url}>
-                <Link to={link.url}>{link.label}</Link>
+                <SmartLink href={link.url}>{link.label}</SmartLink>
               </li>
             ))}
           </NavList>
@@ -77,9 +77,9 @@ const Header: React.FC<HeaderProps> = ({
           <SidebarNavList theme={theme}>
             {menuLinks.map((link) => (
               <li key={link.url}>
-                <Link to={link.url} onClick={closeMenu}>
+                <SmartLink href={link.url} onClick={closeMenu}>
                   {link.label}
-                </Link>
+                </SmartLink>
               </li>
             ))}
           </SidebarNavList>

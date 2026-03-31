@@ -1,8 +1,9 @@
-import Card from './MaddyCard';
+import Card from './Card';
 import '../../styles/css/CardSection.css';
 import { cardInfo } from '@src/interfaces/card';
+import SectionHeading from '@src/shared/ui/SectionHeading';
 
-const MaddyCardSection: React.FC<{
+const CardSection: React.FC<{
   title: string;
   subtitle: string;
   cardInfoList: cardInfo[];
@@ -11,8 +12,7 @@ const MaddyCardSection: React.FC<{
   return (
     <section className="card-section">
       <div className="card-section-header">
-        <h2 className="card-section-title">{title}</h2>
-        <p className="card-section-subtitle">{subtitle}</p>
+        <SectionHeading title={title} subtitle={subtitle} />
       </div>
       <div className="card-section-grid">
         {cardInfoList.map((cardInfo, index) => (
@@ -23,4 +23,4 @@ const MaddyCardSection: React.FC<{
   );
 };
 
-export default MaddyCardSection;
+export default CardSection;

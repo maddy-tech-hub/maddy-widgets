@@ -1,5 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import { Link as RouterLink } from 'react-router-dom';
 
 export const Section = styled.section`
   background: linear-gradient(135deg, #0a192f, #020c1b);
@@ -99,6 +98,8 @@ export const ImageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  box-sizing: border-box;
   animation: ${glow} 3s infinite ease-in-out;
 
   @media (max-width: 768px) {
@@ -115,7 +116,9 @@ export const ImageWrapper = styled.div`
 export const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center 18%;
   border-radius: 50%;
 `;
 
@@ -166,34 +169,4 @@ export const ButtonsWrapper = styled.div`
     flex-direction: column;
     align-items: center;
   }
-`;
-const buttonStyles = `
-  padding: 0.75rem 2rem;
-  background: linear-gradient(to right, #00aaff, #0077cc);
-  border: none;
-  border-radius: 30px;
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  transition: background 0.3s, transform 0.3s;
-
-  &:hover {
-    background: linear-gradient(to right, #0077cc, #005f99);
-    transform: scale(1.05);
-  }
-
-  @media (max-width: 768px) {
-    flex-shrink: 0; /* Prevent button shrinkage in mobile */
-  }
-`;
-
-export const InternalLink = styled(RouterLink)`
-  ${buttonStyles};
-`;
-
-export const ExternalLink = styled.a`
-  ${buttonStyles}
 `;

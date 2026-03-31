@@ -10,10 +10,9 @@ import {
   ProfileImage,
   ButtonIconsWrapper,
   ButtonsWrapper,
-  ExternalLink,
-  InternalLink,
 } from '@src/styles/profile.styles';
 import { getSocialIcon } from './Service/GetSocialIcon';
+import Button from '@src/shared/ui/Button';
 
 const Profile: React.FC<ProfileProps> = ({
   profileImage,
@@ -55,16 +54,15 @@ const Profile: React.FC<ProfileProps> = ({
               )}
             </SocialIcons>
             <ButtonsWrapper>
-              <ExternalLink
+              <Button
                 href={profileText.cvLinkURL}
                 target="_blank"
-                rel="noopener noreferrer"
               >
                 {profileText.cvLinkText}
-              </ExternalLink>
-              <InternalLink to={profileText.aboutLinkURL}>
+              </Button>
+              <Button to={profileText.aboutLinkURL}>
                 {profileText.aboutLinkText}
-              </InternalLink>
+              </Button>
             </ButtonsWrapper>
           </ButtonIconsWrapper>
         </Text>

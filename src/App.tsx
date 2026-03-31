@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'; // Import useNavigate within Router
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -13,13 +12,13 @@ import {
   profileData,
   whatsappData,
 } from './mock/mock';
-import MaddyCardSection from './components/Card/MaddyCardSection';
+import CardSection from './components/Card/CardSection';
 import Contact from './mock/Contact';
 
 const App: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(headerData.menuOpen);
   return (
-    <Router>
+    <>
       <Header
         menuLinks={headerData.menuLinks}
         logoSrc={headerData.logoSrc}
@@ -29,11 +28,11 @@ const App: React.FC = () => {
         theme={headerData.theme}
       />
       <Profile {...profileData} />
-      <MaddyCardSection {...cardData} />
+      <CardSection {...cardData} />
       <Contact />
       <Footer {...footerData} />
       <WhatsAppWidget {...whatsappData} />
-    </Router>
+    </>
   );
 };
 

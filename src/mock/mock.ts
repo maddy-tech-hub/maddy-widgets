@@ -14,7 +14,7 @@ export const profileData = {
     description:
       'I specialize in building responsive frontends with React and scalable backends with .NET C#. My focus is on delivering modern, efficient, and user-friendly web solutions.',
     aboutLinkText: 'More About Me',
-    aboutLinkURL: '/about-me',
+    aboutLinkURL: '/about',
     cvLinkText: 'Download CV',
     cvLinkURL: '/assets/my-cv.pdf',
   },
@@ -71,7 +71,7 @@ export const footerData = {
     {
       title: 'Quick Links',
       links: [
-        { label: 'Home', url: '/home' },
+        { label: 'Home', url: '/' },
         { label: 'About Us', url: '/about' },
         { label: 'Services', url: '/services' },
         { label: 'Contact Us', url: '/contact' },
@@ -80,7 +80,7 @@ export const footerData = {
     {
       title: 'Quick Links',
       links: [
-        { label: 'Home', url: '/home' },
+        { label: 'Home', url: '/' },
         { label: 'About Us', url: '/about' },
         { label: 'Services', url: '/services' },
         { label: 'Contact Us', url: '/contact' },

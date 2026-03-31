@@ -6,7 +6,7 @@ export interface ProfileProps {
     greeting: string;
     name: string;
     title: string;
-    description: string;
+    description: React.ReactNode;
     aboutLinkText: string;
     aboutLinkURL: string;
     cvLinkText: string;

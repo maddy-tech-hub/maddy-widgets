@@ -1,14 +1,13 @@
 import React, { useRef } from 'react';
 import Draggable from 'react-draggable';
-import { IconButton, Tooltip } from '@mui/material';
 import { FaWhatsapp } from 'react-icons/fa';
-import { green } from '@mui/material/colors';
 import { WhatsAppWidgetProps } from '@src/interfaces/whatsapp';
+import FloatingActionButton from '@src/shared/ui/FloatingActionButton';
 
 const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
   phoneNumber,
   position = { bottom: 20, right: 20 },
-  backgroundColor = green[500],
+  backgroundColor = '#25D366',
   iconColor = 'white',
   iconSize = 30,
   tooltipText = 'Chat with us on WhatsApp',
@@ -37,27 +36,15 @@ const WhatsAppWidget: React.FC<WhatsAppWidgetProps> = ({
 
   return (
     <Draggable disabled={!draggable} nodeRef={widgetRef}>
-      <div style={widgetStyle} ref={widgetRef}>
-        <Tooltip title={tooltipText} aria-label="whatsapp">
-          <IconButton
-            onClick={handleClick}
-            sx={{
-              backgroundColor,
-              color: iconColor,
-              borderRadius: '50%',
-              '&:hover': {
-                backgroundColor: green[600],
-                boxShadow: 6,
-                transform: 'scale(1.1)',
-              },
-              '&:active': {
-                transform: 'scale(0.95)',
-              },
-            }}
-          >
-            <FaWhatsapp size={iconSize} />
-          </IconButton>
-        </Tooltip>
+      <div style={widgetStyle} ref={widgetRef} title={tooltipText}>
+        <FloatingActionButton
+          aria-label="Open WhatsApp chat"
+          backgroundColor={backgroundColor}
+          iconColor={iconColor}
+          onClick={handleClick}
+        >
+          <FaWhatsapp size={iconSize} />
+        </FloatingActionButton>
       </div>
     </Draggable>
   );

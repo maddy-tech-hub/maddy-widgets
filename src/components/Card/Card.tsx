@@ -1,22 +1,17 @@
 import { cardInfo } from '@src/interfaces/card';
+import SurfaceCard from '@src/shared/ui/SurfaceCard';
 
-const MaddyCard: React.FC<cardInfo & { borderColor?: string }> = ({
+const Card: React.FC<cardInfo & { borderColor?: string }> = ({
   title,
   subTitle,
-  details,
+  details = [],
   duration,
   linkTitle,
   url,
   borderColor,
 }) => {
   return (
-    <div
-      className="card"
-      style={{
-        border: `1px solid ${borderColor || '#003366'}`,
-        borderLeft: `5px solid ${borderColor || '#003366'}`,
-      }}
-    >
+    <SurfaceCard className="card" accentColor={borderColor}>
       <h3 className="card-title">{title}</h3>
       {subTitle && <h4 className="card-subtitle">{subTitle}</h4>}
       <ul className="card-details">
@@ -30,12 +25,14 @@ const MaddyCard: React.FC<cardInfo & { borderColor?: string }> = ({
           href={url}
           className="card-link"
           style={{ color: `${borderColor || '#003366'}` }}
+          rel="noopener noreferrer"
+          target="_blank"
         >
           {`${linkTitle || 'View'}`}
         </a>
       )}
-    </div>
+    </SurfaceCard>
   );
 };
 
-export default MaddyCard;
+export default Card;

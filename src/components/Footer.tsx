@@ -3,6 +3,7 @@ import { LinkProps } from '@src/interfaces/common';
 import { defaultThemeColors, FooterProps } from '@src/interfaces/footer';
 import { getSocialIcon } from './Service/GetSocialIcon';
 import '../styles/css/footer.css';
+import SmartLink from '@src/shared/ui/SmartLink';
 
 const FooterSection: React.FC<{
   title?: string;
@@ -17,9 +18,9 @@ const FooterSection: React.FC<{
       {links.map(
         (link) =>
           link.url && (
-            <a key={link.url} href={link.url} className="footer-link">
+            <SmartLink key={link.url} href={link.url} className="footer-link">
               {link.label || link.url}
-            </a>
+            </SmartLink>
           )
       )}
     </div>
