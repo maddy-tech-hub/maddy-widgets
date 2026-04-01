@@ -174,6 +174,14 @@ const InfoValue = styled.div`
 const ContactWidget: React.FC<ContactWidgetProps> = ({
   title,
   submitTitle,
+  introEyebrow,
+  introSubtitle,
+  sidebarEyebrow,
+  sidebarTitle,
+  sidebarDescription,
+  successMessage,
+  errorMessage,
+  unconfiguredMessage,
   formFields,
   contactInfo,
   emailConfig,
@@ -220,7 +228,10 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
           formData,
           emailConfig.userId
         );
-        setTransientMessage('Thank you. Your message has been sent.', true);
+        setTransientMessage(
+          successMessage || 'Thank you. Your message has been sent.',
+          true
+        );
       } else if (externalApiUrl) {
         const response = await fetch(externalApiUrl, {
           method: 'POST',
@@ -231,20 +242,32 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
         const responseData = await response.json();
 
         if (response.ok) {
-          setTransientMessage('Thank you. Your message has been sent.', true);
+          setTransientMessage(
+            successMessage || 'Thank you. Your message has been sent.',
+            true
+          );
         } else {
           setTransientMessage(
             `Request failed: ${responseData.message || 'An error occurred.'}`,
             false
           );
         }
+      } else {
+        setTransientMessage(
+          unconfiguredMessage || 'Contact delivery is not configured yet.',
+          false
+        );
+        return;
       }
 
       setFormData({});
       setIsFormValid(false);
     } catch (error) {
       console.error('Error during submission:', error);
-      setTransientMessage('Something went wrong. Please try again.', false);
+      setTransientMessage(
+        errorMessage || 'Something went wrong. Please try again.',
+        false
+      );
     } finally {
       setLoading?.(false);
     }
@@ -259,9 +282,12 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
       <Grid>
         <Panel>
           <SectionHeading
-            eyebrow="Let's build"
+            eyebrow={introEyebrow || "Let's build"}
             title={title}
-            subtitle="Tell me about the product, portfolio, or platform you want to improve. I'm especially interested in React frontends, .NET APIs, dashboards, and migration work."
+            subtitle={
+              introSubtitle ||
+              "Tell me about the product, portfolio, or platform you want to improve. I'm especially interested in React frontends, .NET APIs, dashboards, and migration work."
+            }
           />
 
           <Form onSubmit={handleSubmit}>
@@ -302,12 +328,11 @@ const ContactWidget: React.FC<ContactWidgetProps> = ({
         </Panel>
 
         <Panel>
-          <InfoLabel>Direct contact</InfoLabel>
-          <InfoTitle>Prefer to connect the simple way?</InfoTitle>
+          <InfoLabel>{sidebarEyebrow || 'Direct contact'}</InfoLabel>
+          <InfoTitle>{sidebarTitle || 'Prefer to connect the simple way?'}</InfoTitle>
           <InfoCopy>
-            Reach out for full-stack product work, UI modernization, micro-frontends,
-            or performance improvements. I'm happy to discuss architecture, delivery,
-            and implementation details.
+            {sidebarDescription ||
+              "Reach out for full-stack product work, UI modernization, micro-frontends, or performance improvements. I'm happy to discuss architecture, delivery, and implementation details."}
           </InfoCopy>
 
           <InfoList>

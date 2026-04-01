@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { LogoPresentation } from '@src/interfaces/common';
 import { tokens } from '@src/shared/theme/tokens';
 
 export const HeaderShell = styled.header<{ theme?: any }>`
@@ -22,25 +23,28 @@ export const HeaderContainer = styled.div`
   padding: 0.95rem 0;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.div<{ $presentation?: LogoPresentation }>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 68px;
-  height: 68px;
+  width: ${({ $presentation }) => $presentation?.width || '68px'};
+  height: ${({ $presentation }) => $presentation?.height || '68px'};
   overflow: hidden;
   flex-shrink: 0;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.98);
+  padding: ${({ $presentation }) => $presentation?.padding || '0'};
+  border-radius: ${({ $presentation }) => $presentation?.borderRadius || '20px'};
+  background: ${({ $presentation }) =>
+    $presentation?.background || 'rgba(255, 255, 255, 0.98)'};
   box-shadow: ${tokens.shadow.soft};
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
 
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.1);
+    object-fit: ${({ $presentation }) => $presentation?.fit || 'cover'};
+    object-position: ${({ $presentation }) => $presentation?.position || 'center'};
+    transform: scale(${({ $presentation }) => $presentation?.scale || 1.1});
     display: block;
   }
 `;
@@ -75,6 +79,7 @@ export const NavList = styled.ul<{ theme?: any }>`
     min-height: 42px;
     padding: 0 0.95rem;
     border-radius: ${tokens.radius.pill};
+    border: 1px solid transparent;
     color: ${({ theme }) => theme?.navLinkColor || 'rgba(248, 251, 255, 0.8)'};
     font-size: 0.95rem;
     font-weight: 600;
@@ -82,12 +87,23 @@ export const NavList = styled.ul<{ theme?: any }>`
     transition:
       color 0.2s ease,
       background 0.2s ease,
-      transform 0.2s ease;
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
-    &:hover,
-    &[aria-current='page'] {
+    &:hover {
       color: ${({ theme }) => theme?.navLinkHoverColor || tokens.color.inkInverse};
       background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    &[aria-current='page'] {
+      color: ${({ theme }) => theme?.navLinkActiveColor || tokens.color.inkInverse};
+      background: ${({ theme }) =>
+        theme?.navLinkActiveBackground ||
+        'linear-gradient(135deg, rgba(17, 126, 255, 0.85), rgba(45, 79, 212, 0.8))'};
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 14px 28px rgba(6, 18, 34, 0.35);
       transform: translateY(-1px);
     }
   }
@@ -215,16 +231,30 @@ export const SidebarNavList = styled.ul<{ theme?: any }>`
     display: block;
     padding: 1rem 1.05rem;
     border-radius: 20px;
+    border: 1px solid transparent;
     color: ${({ theme }) => theme?.navLinkColor || tokens.color.inkInverse};
     font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
     background: rgba(255, 255, 255, 0.05);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      color 0.2s ease;
 
-    &:hover,
-    &[aria-current='page'] {
+    &:hover {
       background: rgba(255, 255, 255, 0.1);
+    }
+
+    &[aria-current='page'] {
+      color: ${({ theme }) => theme?.navLinkActiveColor || tokens.color.inkInverse};
+      background: ${({ theme }) =>
+        theme?.navLinkActiveBackground ||
+        'linear-gradient(135deg, rgba(17, 126, 255, 0.88), rgba(45, 79, 212, 0.84))'};
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 24px rgba(6, 18, 34, 0.36);
     }
   }
 `;

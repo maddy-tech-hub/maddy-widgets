@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface SmartLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -7,6 +7,11 @@ interface SmartLinkProps
 }
 
 const isInternalPath = (href: string) => href.startsWith('/') && !href.startsWith('//');
+const normalizePath = (value: string) => {
+  const pathOnly = value.split(/[?#]/)[0] || '/';
+  const trimmed = pathOnly.replace(/\/+$/, '');
+  return trimmed || '/';
+};
 
 const SmartLink: React.FC<SmartLinkProps> = ({
   href,
@@ -18,8 +23,28 @@ const SmartLink: React.FC<SmartLinkProps> = ({
   ...props
 }) => {
   const internal = isInternalPath(href);
-  const activePath =
-    typeof window !== 'undefined' ? window.location.pathname : undefined;
+  const [activePath, setActivePath] = useState<string>(() =>
+    typeof window !== 'undefined' ? normalizePath(window.location.pathname) : '/'
+  );
+  const normalizedHref = internal ? normalizePath(href) : undefined;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const handleLocationChange = () => {
+      setActivePath(normalizePath(window.location.pathname));
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
 
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
     onClick?.(event);
@@ -30,9 +55,13 @@ const SmartLink: React.FC<SmartLinkProps> = ({
 
     event.preventDefault();
 
-    if (typeof window !== 'undefined' && window.location.pathname !== href) {
+    if (
+      typeof window !== 'undefined' &&
+      normalizePath(window.location.pathname) !== normalizePath(href)
+    ) {
       window.history.pushState({}, '', href);
       window.dispatchEvent(new PopStateEvent('popstate'));
+      setActivePath(normalizePath(href));
     }
   };
 
@@ -43,7 +72,7 @@ const SmartLink: React.FC<SmartLinkProps> = ({
       onClick={handleClick}
       rel={internal ? rel : rel || 'noopener noreferrer'}
       target={internal ? target : target || '_blank'}
-      aria-current={internal && activePath === href ? 'page' : undefined}
+      aria-current={internal && activePath === normalizedHref ? 'page' : undefined}
       {...props}
     >
       {children}

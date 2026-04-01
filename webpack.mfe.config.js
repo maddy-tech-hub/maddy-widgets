@@ -17,6 +17,7 @@ module.exports = {
               './CardSection': './src/components/Card/CardSection',
               './Card': './src/components/Card/Card',
               './Button': './src/shared/ui/Button',
+              './FeatureGrid': './src/shared/ui/FeatureGrid',
               './PageIntro': './src/shared/ui/PageIntro',
               './SectionHeading': './src/shared/ui/SectionHeading',
               './SurfaceCard': './src/shared/ui/SurfaceCard',

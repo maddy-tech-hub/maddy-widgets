@@ -1,6 +1,14 @@
 export interface ContactWidgetProps {
   title: string;
   submitTitle: string;
+  introEyebrow?: string;
+  introSubtitle?: string;
+  sidebarEyebrow?: string;
+  sidebarTitle?: string;
+  sidebarDescription?: string;
+  successMessage?: string;
+  errorMessage?: string;
+  unconfiguredMessage?: string;
   formFields: Array<{
     id: string; // ID for the field (e.g., "email", "name")
     label: string; // Label for the field (e.g., "Your Name")

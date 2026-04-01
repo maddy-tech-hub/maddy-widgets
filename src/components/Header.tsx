@@ -22,6 +22,7 @@ import SmartLink from '@src/shared/ui/SmartLink';
 const Header: React.FC<HeaderProps> = ({
   menuLinks,
   logoSrc,
+  logoPresentation,
   menuOpen,
   setMenuOpen,
   onLoginClick,
@@ -64,7 +65,9 @@ const Header: React.FC<HeaderProps> = ({
       <HeaderShell theme={theme}>
         <HeaderContainer>
           <SmartLink href="/" aria-label="Go to home page">
-            <Logo>{logoSrc && <img src={logoSrc} alt="Main Logo" />}</Logo>
+            <Logo $presentation={logoPresentation}>
+              {logoSrc && <img src={logoSrc} alt="Main Logo" />}
+            </Logo>
           </SmartLink>
 
           <Nav>
@@ -101,7 +104,9 @@ const Header: React.FC<HeaderProps> = ({
         <SidebarContent>
           <SidebarHeaderRow>
             <SmartLink href="/" aria-label="Go to home page" onClick={closeMenu}>
-              <Logo>{logoSrc && <img src={logoSrc} alt="Main Logo" />}</Logo>
+              <Logo $presentation={logoPresentation}>
+                {logoSrc && <img src={logoSrc} alt="Main Logo" />}
+              </Logo>
             </SmartLink>
 
             <SidebarCloseButton onClick={closeMenu} theme={theme} aria-label="Close navigation">

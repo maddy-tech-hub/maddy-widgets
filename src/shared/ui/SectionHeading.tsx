@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 
 const Eyebrow = styled.p`
   margin: 0 0 8px;
-  color: ${tokens.color.brand};
+  color: var(--section-eyebrow-color, ${tokens.color.brand});
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -17,7 +17,7 @@ const Eyebrow = styled.p`
 
 const Title = styled.h2`
   margin: 0;
-  color: ${tokens.color.ink};
+  color: var(--section-title-color, ${tokens.color.ink});
   font-size: clamp(1.9rem, 2.8vw, 2.9rem);
   line-height: 1.08;
 `;
@@ -25,7 +25,7 @@ const Title = styled.h2`
 const Subtitle = styled.p`
   margin: 10px 0 0;
   max-width: 680px;
-  color: ${tokens.color.inkMuted};
+  color: var(--section-subtitle-color, ${tokens.color.inkMuted});
   font-size: 1rem;
   line-height: 1.8;
 `;

@@ -1,4 +1,4 @@
-import { SocialLinks, LinkProps } from './common';
+import { SocialLinks, LinkProps, LogoPresentation } from './common';
 
 export interface LinkSection {
   title?: string;
@@ -18,6 +18,7 @@ export interface FooterProps {
   companyName: string;
   address: string;
   logoSrc: string;
+  logoPresentation?: LogoPresentation;
   socialLinks?: SocialLinks;
   showFooterBottom?: boolean;
   linkSections?: LinkSection[];
