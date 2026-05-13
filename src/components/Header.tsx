@@ -21,6 +21,7 @@ import SmartLink from '@src/shared/ui/SmartLink';
 
 const Header: React.FC<HeaderProps> = ({
   menuLinks,
+  currentPath,
   logoSrc,
   logoPresentation,
   menuOpen,
@@ -64,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({
     <>
       <HeaderShell theme={theme}>
         <HeaderContainer>
-          <SmartLink href="/" aria-label="Go to home page">
+          <SmartLink href="/" aria-label="Go to home page" activePathOverride={currentPath}>
             <Logo $presentation={logoPresentation}>
               {logoSrc && <img src={logoSrc} alt="Main Logo" />}
             </Logo>
@@ -74,7 +75,9 @@ const Header: React.FC<HeaderProps> = ({
             <NavList theme={theme}>
               {menuLinks.map((link) => (
                 <li key={link.url}>
-                  <SmartLink href={link.url}>{link.label}</SmartLink>
+                  <SmartLink href={link.url} activePathOverride={currentPath}>
+                    {link.label}
+                  </SmartLink>
                 </li>
               ))}
             </NavList>
@@ -103,7 +106,12 @@ const Header: React.FC<HeaderProps> = ({
       <Sidebar id="mobile-navigation" menuOpen={menuOpen} theme={theme}>
         <SidebarContent>
           <SidebarHeaderRow>
-            <SmartLink href="/" aria-label="Go to home page" onClick={closeMenu}>
+            <SmartLink
+              href="/"
+              aria-label="Go to home page"
+              onClick={closeMenu}
+              activePathOverride={currentPath}
+            >
               <Logo $presentation={logoPresentation}>
                 {logoSrc && <img src={logoSrc} alt="Main Logo" />}
               </Logo>
@@ -117,7 +125,11 @@ const Header: React.FC<HeaderProps> = ({
           <SidebarNavList theme={theme}>
             {menuLinks.map((link) => (
               <li key={link.url}>
-                <SmartLink href={link.url} onClick={closeMenu}>
+                <SmartLink
+                  href={link.url}
+                  onClick={closeMenu}
+                  activePathOverride={currentPath}
+                >
                   {link.label}
                 </SmartLink>
               </li>

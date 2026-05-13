@@ -15,6 +15,7 @@ export interface HeaderTheme {
 
 export interface HeaderProps {
   menuLinks: LinkProps[];
+  currentPath?: string;
   onLoginClick?: () => void;
   logoSrc?: string;
   logoPresentation?: LogoPresentation;
