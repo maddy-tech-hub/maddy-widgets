@@ -4,6 +4,7 @@ interface SmartLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode;
+  activePathOverride?: string;
 }
 
 const isInternalPath = (href: string) => href.startsWith('/') && !href.startsWith('//');
@@ -20,6 +21,7 @@ const SmartLink: React.FC<SmartLinkProps> = ({
   onClick,
   rel,
   target,
+  activePathOverride,
   ...props
 }) => {
   const internal = isInternalPath(href);
@@ -27,6 +29,10 @@ const SmartLink: React.FC<SmartLinkProps> = ({
     typeof window !== 'undefined' ? normalizePath(window.location.pathname) : '/'
   );
   const normalizedHref = internal ? normalizePath(href) : undefined;
+  const normalizedActivePath =
+    typeof activePathOverride === 'string'
+      ? normalizePath(activePathOverride)
+      : activePath;
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -72,7 +78,9 @@ const SmartLink: React.FC<SmartLinkProps> = ({
       onClick={handleClick}
       rel={internal ? rel : rel || 'noopener noreferrer'}
       target={internal ? target : target || '_blank'}
-      aria-current={internal && activePath === normalizedHref ? 'page' : undefined}
+      aria-current={
+        internal && normalizedActivePath === normalizedHref ? 'page' : undefined
+      }
       {...props}
     >
       {children}
